@@ -7,7 +7,6 @@ namespace cmdOS
 {
     public class Kernel : Sys.Kernel
     {
-
         protected override void BeforeRun()
         {
             Console.Clear();
@@ -21,11 +20,11 @@ namespace cmdOS
             var input = Console.ReadLine();
             // Console.WriteLine(input);
 
-            // Options Time
-            bool options_mode = false;
-
             // Language
             bool lang_1 = false;
+
+            // Options Time
+            bool options_mode = false;
 
             if (input == "" && options_mode == false)
             {
@@ -69,7 +68,14 @@ namespace cmdOS
                     Console.Clear();
                     Console.WriteLine("-LANGUAGE-");
                     Console.WriteLine("1. English");
-                    Console.WriteLine("2. Back");
+                    Console.WriteLine("2. Default");
+
+                    if (input == "English" && options_mode == true || input == "english" && options_mode == true || input == "Default" && options_mode == true || input == "default" && options_mode == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Language is now is English");
+                        lang_1 = true;
+                    }
                 }
 
                 if  (input == "Exit" && options_mode == true || input == "exit" && options_mode == true)
@@ -117,6 +123,14 @@ namespace cmdOS
             {
                 Console.Clear();
                 Console.WriteLine("cmdOS: v0.1.3");
+                if (lang_1 == true)
+                {
+                    Console.WriteLine("Language: English");
+                }
+                else
+                {
+                    Console.WriteLine("Language: English");
+                }
             }
         }
     }
