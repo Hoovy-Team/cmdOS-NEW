@@ -8,3 +8,6 @@ Follow the install tutorial on this [offical cosmos page](https://www.gocosmos.o
 and follow on youtube
 
 pls using Visual Studio 2022
+
+# VERSION
+0.1.3 (unRelease Yet)

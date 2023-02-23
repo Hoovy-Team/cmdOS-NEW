@@ -19,19 +19,32 @@ namespace cmdOS
         {
             Console.Write("Text Here: ");
             var input = Console.ReadLine();
-            Console.WriteLine(input);
+            // Console.WriteLine(input);
 
-            if (input == "")
+            // Options Time
+            bool options_mode = false;
+
+            // Language
+            bool lang_1 = false;
+
+            if (input == "" && options_mode == false)
             {
-                Console.WriteLine("ERROR: Missing of 'run' command");
+                if (lang_1 == true)
+                {
+                    Console.WriteLine("ERROR: Missing of 'run' command");
+                }
+                else if (lang_1 == false)
+                {
+                    Console.WriteLine("ERROR: Missing of 'run' command");
+                }   
             }
 
-            if (input == "run")
+            if (input == "run" && options_mode == false)
             {
                 Console.WriteLine("ERROR: Missing command to run");
             }
 
-            if (input == "run help")
+            if (input == "run help" && options_mode == false)
             {
                 Console.Clear();
                 Console.WriteLine("-ABOUT OF THE CMDOS-");
@@ -40,14 +53,38 @@ namespace cmdOS
                 Console.WriteLine("3. 'run about': Display all text for about this OS");
                 Console.WriteLine("4. 'run shutdown': Shutdown and turn off the OS");
                 Console.WriteLine("5. 'run restart': Restart the OS");
+                Console.WriteLine("6. 'run options': Display all of about options");
             }
 
-            if (input == "run clear")
+            if (input == "run options" && options_mode == false)
+            {
+                options_mode = true;
+                Console.Clear();
+                Console.WriteLine("-OPTIONS SETTING-");
+                Console.WriteLine("1. Language: Change language");
+                Console.WriteLine("2. Exit: Exit with Saving");
+
+                if (input == "language" && options_mode == true || input == "Language" && options_mode == true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("-LANGUAGE-");
+                    Console.WriteLine("1. English");
+                    Console.WriteLine("2. Back");
+                }
+
+                if  (input == "Exit" && options_mode == true || input == "exit" && options_mode == true)
+                {
+                    options_mode = false;
+                    Console.Clear();
+                }
+            }
+
+            if (input == "run clear" && options_mode == false)
             {
                 Console.Clear();
             }
 
-            if (input == "run about")
+            if (input == "run about" && options_mode == false)
             {
                 Console.Clear();
                 Console.WriteLine("-ABOUT OF THE CMDOS-");
@@ -56,27 +93,27 @@ namespace cmdOS
                 Console.WriteLine("1. Huy1234TH: Main of this OS");
             }
 
-            if (input == "run shutdown")
+            if (input == "run shutdown" && options_mode == false)
             {
                 Console.Clear();
                 Console.WriteLine("We are Shutdown the OS");
                 Cosmos.System.Power.Shutdown();
             }
 
-            if (input == "run restart")
+            if (input == "run restart" && options_mode == false)
             {
                 Console.Clear();
                 Console.WriteLine("We are Restart the OS");
                 Cosmos.System.Power.Reboot();
             }
 
-            if (input == "install this stupid os" || input == "install this great os" || input == "install" || input == "install os")
+            if (input == "install this stupid os" && options_mode == false || input == "install this great os" && options_mode == false || input == "install" && options_mode == false || input == "install os" && options_mode == false)
             {
                 // Console.Clear();
                 Console.WriteLine("no");
             }
 
-            if (input == "run checkSYSTEM")
+            if (input == "run checkSYSTEM" && options_mode == false)
             {
                 Console.Clear();
                 Console.WriteLine("cmdOS: v0.1.3");
