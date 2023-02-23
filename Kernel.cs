@@ -12,6 +12,9 @@ namespace cmdOS
             Console.Clear();
             Console.WriteLine("Wellcome to cmdOS!!, please type 'run help' for more command");
             Console.WriteLine("cmdOS v0.1.3");
+
+            Cosmos.System.Graphics.VGAScreen.PixelHeight = 600;
+            Cosmos.System.Graphics.VGAScreen.PixelWidth = 800;
         }
 
         protected override void Run()
@@ -63,6 +66,7 @@ namespace cmdOS
                 Console.WriteLine("A free, open-source operating system");
                 Console.WriteLine("You can rebuild this operating system");
                 Console.WriteLine("But you need credits of the member who made this os");
+                Console.WriteLine("\nThe Source can find on https://github.com/Hoovy-Team/cmdOS-NEW");
             }
 
             if (input == "run options" && options_mode == false)
@@ -72,27 +76,29 @@ namespace cmdOS
                 Console.WriteLine("-OPTIONS SETTING-");
                 Console.WriteLine("1. Language: Change language");
                 Console.WriteLine("2. run checkSYSTEM: Check the OS");
+                Console.WriteLine("3. options off: Turn off options mode");
+            }
 
-                if (input == "language" && options_mode == true || input == "Language" && options_mode == true)
-                {
-                    Console.Clear();
-                    Console.WriteLine("-LANGUAGE-");
-                    Console.WriteLine("1. English");
-                    Console.WriteLine("2. Default");
+            if (input == "language" && options_mode == true || input == "Language" && options_mode == true)
+            {
+                Console.Clear();
+                Console.WriteLine("-LANGUAGE-");
+                Console.WriteLine("1. English");
+                Console.WriteLine("2. Default");
+            }
 
-                    if (input == "English" && options_mode == true || input == "english" && options_mode == true || input == "Default" && options_mode == true || input == "default" && options_mode == true)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Language is now is English");
-                        lang_1 = true;
-                    }
-                }
+            if (input == "options off" && options_mode == true)
+            {
+                options_mode = false;
+                Console.Clear();
+                Console.WriteLine("Options Mode was off");
+            }
 
-                if  (input == "Exit" && options_mode == true || input == "exit" && options_mode == true)
-                {
-                    options_mode = false;
-                    Console.Clear();
-                }
+            if (input == "English" && options_mode == true || input == "english" && options_mode == true || input == "Default" && options_mode == true || input == "default" && options_mode == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Language is now is English");
+                lang_1 = true;
             }
 
             if (input == "run clear" && options_mode == false)
