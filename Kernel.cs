@@ -53,6 +53,16 @@ namespace cmdOS
                 Console.WriteLine("4. 'run shutdown': Shutdown and turn off the OS");
                 Console.WriteLine("5. 'run restart': Restart the OS");
                 Console.WriteLine("6. 'run options': Display all of about options");
+                Console.WriteLine("7. 'run copyright': A CopyRight Text will display");
+            }
+
+            if (input == "run copyright" && options_mode == false)
+            {
+                Console.Clear();
+                Console.WriteLine("COPYRIGHT");
+                Console.WriteLine("A free, open-source operating system");
+                Console.WriteLine("You can rebuild this operating system");
+                Console.WriteLine("But you need credits of the member who made this os");
             }
 
             if (input == "run options" && options_mode == false)
@@ -61,7 +71,7 @@ namespace cmdOS
                 Console.Clear();
                 Console.WriteLine("-OPTIONS SETTING-");
                 Console.WriteLine("1. Language: Change language");
-                Console.WriteLine("2. Exit: Exit with Saving");
+                Console.WriteLine("2. run checkSYSTEM: Check the OS");
 
                 if (input == "language" && options_mode == true || input == "Language" && options_mode == true)
                 {
@@ -97,6 +107,7 @@ namespace cmdOS
                 Console.WriteLine("cmdOS: version 0.1.3");
                 Console.WriteLine("-Who made this?-");
                 Console.WriteLine("1. Huy1234TH: Main of this OS");
+                Console.WriteLine("2. MemeHoovy: New Coder");
             }
 
             if (input == "run shutdown" && options_mode == false)
