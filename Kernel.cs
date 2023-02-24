@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 using Sys = Cosmos.System;
+using System.Diagnostics;
 
 namespace cmdOS
 {
     public class Kernel : Sys.Kernel
     {
+        readonly string VERSION = "0.1.3";
+
+        bool SAFE_MODE = false;
+
         protected override void BeforeRun()
         {
             Console.Clear();
             Console.WriteLine("Wellcome to cmdOS!!, please type 'run help' for more command");
-            Console.WriteLine("cmdOS v0.1.3");
+            Console.WriteLine("cmdOS v" + VERSION);
 
-            Cosmos.System.Graphics.VGAScreen.PixelHeight = 600;
-            Cosmos.System.Graphics.VGAScreen.PixelWidth = 800;
+            Sys.Graphics.VGAScreen.PixelHeight = 600;
+            Sys.Graphics.VGAScreen.PixelWidth = 800;
         }
 
         protected override void Run()
@@ -57,6 +62,7 @@ namespace cmdOS
                 Console.WriteLine("5. 'run restart': Restart the OS");
                 Console.WriteLine("6. 'run options': Display all of about options");
                 Console.WriteLine("7. 'run copyright': A CopyRight Text will display");
+                Console.WriteLine("8. 'run getCurrentDirectory': Will return the current directory, fails if safe mode is enabled. (disabled by default)");
             }
 
             if (input == "run copyright" && options_mode == false)
@@ -110,7 +116,7 @@ namespace cmdOS
             {
                 Console.Clear();
                 Console.WriteLine("-ABOUT OF THE CMDOS-");
-                Console.WriteLine("cmdOS: version 0.1.3");
+                Console.WriteLine("cmdOS: version " + VERSION);
                 Console.WriteLine("-Who made this?-");
                 Console.WriteLine("1. Huy1234TH: Main of this OS");
                 Console.WriteLine("2. MemeHoovy: New Coder");
@@ -120,14 +126,14 @@ namespace cmdOS
             {
                 Console.Clear();
                 Console.WriteLine("We are Shutdown the OS");
-                Cosmos.System.Power.Shutdown();
+                Sys.Power.Shutdown();
             }
 
             if (input == "run restart" && options_mode == false)
             {
                 Console.Clear();
                 Console.WriteLine("We are Restart the OS");
-                Cosmos.System.Power.Reboot();
+                Sys.Power.Reboot();
             }
 
             if (input == "install this stupid os" && options_mode == false || input == "install this great os" && options_mode == false || input == "install" && options_mode == false || input == "install os" && options_mode == false)
@@ -139,7 +145,7 @@ namespace cmdOS
             if (input == "run checkSYSTEM" && options_mode == false)
             {
                 Console.Clear();
-                Console.WriteLine("cmdOS: v0.1.3");
+                Console.WriteLine("cmdOS: v " + VERSION);
                 if (lang_1 == true)
                 {
                     Console.WriteLine("Language: English");
@@ -147,6 +153,42 @@ namespace cmdOS
                 else
                 {
                     Console.WriteLine("Language: English");
+                }
+            }
+
+            if (input == "run getCurrentDirectory" && options_mode == false)
+            {
+                Console.Clear();
+                if (!SAFE_MODE)
+                    Console.WriteLine("Current directory is: " + System.IO.Directory.GetCurrentDirectory());
+                else
+                    Console.WriteLine("Safe mode is enabled, command was not runned");
+            }
+
+            if (input == "run openWebsite" && options_mode == false)
+            {
+                Console.WriteLine("Waiting for input: ");
+                var http = Console.ReadLine();
+
+                if (SAFE_MODE) return;
+
+                if (http != null && http.StartsWith("https://www.") || http.StartsWith("http://www."))
+                {
+                    Process f = new Process();
+
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo();
+
+                    f.StartInfo = processStartInfo;
+
+                    if (!f.Start())
+                    {
+                        Console.WriteLine("Site failed to start.");
+                    }
+                    Process.Start(http);
+                }
+                else
+                {
+                    Console.WriteLine("Input cannot be blank");
                 }
             }
         }
