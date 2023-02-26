@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Sys = Cosmos.System;
+using System.Diagnostics;
 
 namespace cmdOS
 {
@@ -158,6 +159,42 @@ namespace cmdOS
                     Console.WriteLine("ERROR: A Unknow command");
                     break;
             }
-        }
+
+        /*    if (input == "run getCurrentDirectory" && options_mode == false)
+            {
+                Console.Clear();
+                if (!SAFE_MODE)
+                    Console.WriteLine("Current directory is: " + System.IO.Directory.GetCurrentDirectory());
+                else
+                    Console.WriteLine("Safe mode is enabled, command was not runned");
+            }
+
+            if (input == "run openWebsite" && options_mode == false)
+            {
+                Console.WriteLine("Waiting for input: ");
+                var http = Console.ReadLine();
+
+                if (SAFE_MODE) return;
+
+                if (http != null && http.StartsWith("https://www.") || http.StartsWith("http://www."))
+                {
+                    Process f = new Process();
+
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo();
+
+                    f.StartInfo = processStartInfo;
+
+                    if (!f.Start())
+                    {
+                        Console.WriteLine("Site failed to start.");
+                    }
+                    Process.Start(http);
+                }
+                else
+                {
+                    Console.WriteLine("Input cannot be blank");
+                }
+            }
+        }*/
     }
 }
