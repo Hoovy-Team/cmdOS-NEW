@@ -36,7 +36,7 @@ namespace cmdOS
             var input = Console.ReadLine();
             Console.WriteLine(input);
 
-            switch(input) // switch is better
+            switch (input) // switch is better
             {
                 // language command
                 case "run options -language -english":
@@ -160,41 +160,42 @@ namespace cmdOS
                     break;
             }
 
-        /*    if (input == "run getCurrentDirectory" && options_mode == false)
-            {
-                Console.Clear();
-                if (!SAFE_MODE)
-                    Console.WriteLine("Current directory is: " + System.IO.Directory.GetCurrentDirectory());
-                else
-                    Console.WriteLine("Safe mode is enabled, command was not runned");
-            }
-
-            if (input == "run openWebsite" && options_mode == false)
-            {
-                Console.WriteLine("Waiting for input: ");
-                var http = Console.ReadLine();
-
-                if (SAFE_MODE) return;
-
-                if (http != null && http.StartsWith("https://www.") || http.StartsWith("http://www."))
+            /*    if (input == "run getCurrentDirectory" && options_mode == false)
                 {
-                    Process f = new Process();
+                    Console.Clear();
+                    if (!SAFE_MODE)
+                        Console.WriteLine("Current directory is: " + System.IO.Directory.GetCurrentDirectory());
+                    else
+                        Console.WriteLine("Safe mode is enabled, command was not runned");
+                }
 
-                    ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                if (input == "run openWebsite" && options_mode == false)
+                {
+                    Console.WriteLine("Waiting for input: ");
+                    var http = Console.ReadLine();
 
-                    f.StartInfo = processStartInfo;
+                    if (SAFE_MODE) return;
 
-                    if (!f.Start())
+                    if (http != null && http.StartsWith("https://www.") || http.StartsWith("http://www."))
                     {
-                        Console.WriteLine("Site failed to start.");
+                        Process f = new Process();
+
+                        ProcessStartInfo processStartInfo = new ProcessStartInfo();
+
+                        f.StartInfo = processStartInfo;
+
+                        if (!f.Start())
+                        {
+                            Console.WriteLine("Site failed to start.");
+                        }
+                        Process.Start(http);
                     }
-                    Process.Start(http);
+                    else
+                    {
+                        Console.WriteLine("Input cannot be blank");
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Input cannot be blank");
-                }
-            }
-        }*/
+            }*/
+        }
     }
 }
