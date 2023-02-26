@@ -7,147 +7,156 @@ namespace cmdOS
 {
     public class Kernel : Sys.Kernel
     {
+        readonly string VERSION = "0.1.3";
+        bool options_mode = false; //default is false
+
+        // language
+        bool english = true; //default is true
         protected override void BeforeRun()
         {
             Console.Clear();
             Console.WriteLine("Wellcome to cmdOS!!, please type 'run help' for more command");
-            Console.WriteLine("cmdOS v0.1.3");
+            Console.WriteLine("cmdOS v" + VERSION);
 
-            Cosmos.System.Graphics.VGAScreen.PixelHeight = 600;
-            Cosmos.System.Graphics.VGAScreen.PixelWidth = 800;
+            Sys.Graphics.VGAScreen.PixelHeight = 600;
+            Sys.Graphics.VGAScreen.PixelWidth = 800;
         }
 
         protected override void Run()
         {
-            Console.Write("Text Here: ");
+            if (options_mode == true)
+            {
+                Console.Write("Text Here (!OPTIONS MODE!): ");
+            }
+            else
+            {
+                Console.Write("Text Here: ");
+            }
             var input = Console.ReadLine();
-            // Console.WriteLine(input);
+            Console.WriteLine(input);
 
-            // Language
-            bool lang_1 = false;
-
-            // Options Time
-            bool options_mode = false;
-
-            if (input == "" && options_mode == false)
+            switch(input) // switch is better
             {
-                if (lang_1 == true)
-                {
-                    Console.WriteLine("ERROR: Missing of 'run' command");
-                }
-                else if (lang_1 == false)
-                {
-                    Console.WriteLine("ERROR: Missing of 'run' command");
-                }   
-            }
+                // language command
+                case "run options -language -english":
+                    Console.Clear();
+                    Console.WriteLine("English Language Mode 'USING'");
+                    english = true;
+                    break;
 
-            if (input == "run" && options_mode == false)
-            {
-                Console.WriteLine("ERROR: Missing command to run");
-            }
+                // empty command
+                case "":
+                    Console.WriteLine("ERROR: Command cannot empty");
+                    break;
 
-            if (input == "run help" && options_mode == false)
-            {
-                Console.Clear();
-                Console.WriteLine("-ABOUT OF THE CMDOS-");
-                Console.WriteLine("1. 'run help': Display this text");
-                Console.WriteLine("2. 'run clear': Clear all text");
-                Console.WriteLine("3. 'run about': Display all text for about this OS");
-                Console.WriteLine("4. 'run shutdown': Shutdown and turn off the OS");
-                Console.WriteLine("5. 'run restart': Restart the OS");
-                Console.WriteLine("6. 'run options': Display all of about options");
-                Console.WriteLine("7. 'run copyright': A CopyRight Text will display");
-            }
+                // normall command
+                case "run options -language":
+                    if (options_mode == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("To Disable it, type 'run options -mode -disable'");
+                        Console.WriteLine("To Change language, type command again with '-<language want to change>");
+                        Console.WriteLine("1. English");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Options Mode is not enable\nTo Enable it, type 'run options -mode -enable'");
+                    }
+                    break;
 
-            if (input == "run copyright" && options_mode == false)
-            {
-                Console.Clear();
-                Console.WriteLine("COPYRIGHT");
-                Console.WriteLine("A free, open-source operating system");
-                Console.WriteLine("You can rebuild this operating system");
-                Console.WriteLine("But you need credits of the member who made this os");
-                Console.WriteLine("\nThe Source can find on https://github.com/Hoovy-Team/cmdOS-NEW");
-            }
+                case "run options -mode -enable":
+                    if (options_mode == true)
+                    {
+                        Console.WriteLine("You already enable options mode");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Successful Enable Options Mode");
+                    }
+                    break;
 
-            if (input == "run options" && options_mode == false)
-            {
-                options_mode = true;
-                Console.Clear();
-                Console.WriteLine("-OPTIONS SETTING-");
-                Console.WriteLine("1. Language: Change language");
-                Console.WriteLine("2. run checkSYSTEM: Check the OS");
-                Console.WriteLine("3. options off: Turn off options mode");
-            }
+                case "run options -mode -disable":
+                    if (options_mode == false)
+                    {
+                        Console.WriteLine("You already disable options mode");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Successful Disable Options Mode");
+                    }
+                    break;
 
-            if (input == "language" && options_mode == true || input == "Language" && options_mode == true)
-            {
-                Console.Clear();
-                Console.WriteLine("-LANGUAGE-");
-                Console.WriteLine("1. English");
-                Console.WriteLine("2. Default");
-            }
+                case "run options":
+                    if (options_mode == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("To Disable it, type 'run options -mode -disable'");
+                        Console.WriteLine("\n-OPTIONS COMMAND-");
+                        Console.WriteLine("1. -language");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Options Mode is not enable\nTo Enable it, type 'run options -mode -enable'");
+                    }
+                    break;
 
-            if (input == "options off" && options_mode == true)
-            {
-                options_mode = false;
-                Console.Clear();
-                Console.WriteLine("Options Mode was off");
-            }
+                case "run":
+                    Console.WriteLine("ERROR: Missing command to run");
+                    break;
 
-            if (input == "English" && options_mode == true || input == "english" && options_mode == true || input == "Default" && options_mode == true || input == "default" && options_mode == true)
-            {
-                Console.Clear();
-                Console.WriteLine("Language is now is English");
-                lang_1 = true;
-            }
+                case "run help":
+                    Console.Clear();
+                    Console.WriteLine("-ABOUT OF THE CMDOS-");
+                    Console.WriteLine("1. 'run help': Display this text");
+                    Console.WriteLine("2. 'run clear': Clear all text");
+                    Console.WriteLine("3. 'run about': Display all text for about this OS");
+                    Console.WriteLine("4. 'run shutdown': Shutdown and turn off the OS");
+                    Console.WriteLine("5. 'run restart': Restart the OS");
+                    Console.WriteLine("6. 'run copyright': A CopyRight Text will display");
+                    break;
 
-            if (input == "run clear" && options_mode == false)
-            {
-                Console.Clear();
-            }
+                case "run copyright":
+                    Console.Clear();
+                    Console.WriteLine("COPYRIGHT");
+                    Console.WriteLine("A free, open-source operating system");
+                    Console.WriteLine("You can rebuild this operating system");
+                    Console.WriteLine("But you need credits of the member who made this os");
+                    Console.WriteLine("\nThe Source can find on https://github.com/Hoovy-Team/cmdOS-NEW");
+                    break;
 
-            if (input == "run about" && options_mode == false)
-            {
-                Console.Clear();
-                Console.WriteLine("-ABOUT OF THE CMDOS-");
-                Console.WriteLine("cmdOS: version 0.1.3");
-                Console.WriteLine("-Who made this?-");
-                Console.WriteLine("1. Huy1234TH: Main of this OS");
-                Console.WriteLine("2. MemeHoovy: New Coder");
-            }
+                case "run clear":
+                    Console.Clear();
+                    break;
 
-            if (input == "run shutdown" && options_mode == false)
-            {
-                Console.Clear();
-                Console.WriteLine("We are Shutdown the OS");
-                Cosmos.System.Power.Shutdown();
-            }
+                case "run about":
+                    Console.Clear();
+                    Console.WriteLine("-ABOUT OF THE CMDOS-");
+                    Console.WriteLine("cmdOS: version " + VERSION);
+                    Console.WriteLine("-Who made this?-");
+                    Console.WriteLine("1. Huy1234TH: Main of this OS");
+                    Console.WriteLine("2. MemeHoovy: Second of the coder");
+                    break;
 
-            if (input == "run restart" && options_mode == false)
-            {
-                Console.Clear();
-                Console.WriteLine("We are Restart the OS");
-                Cosmos.System.Power.Reboot();
-            }
+                case "run shutdown":
+                    Console.Clear();
+                    Console.WriteLine("We are Shutdown the OS");
+                    Cosmos.System.Power.Shutdown();
+                    break;
 
-            if (input == "install this stupid os" && options_mode == false || input == "install this great os" && options_mode == false || input == "install" && options_mode == false || input == "install os" && options_mode == false)
-            {
-                // Console.Clear();
-                Console.WriteLine("no");
-            }
+                case "run restart":
+                    Console.Clear();
+                    Console.WriteLine("We are Restart the OS");
+                    Cosmos.System.Power.Reboot();
+                    break;
 
-            if (input == "run checkSYSTEM" && options_mode == false)
-            {
-                Console.Clear();
-                Console.WriteLine("cmdOS: v0.1.3");
-                if (lang_1 == true)
-                {
-                    Console.WriteLine("Language: English");
-                }
-                else
-                {
-                    Console.WriteLine("Language: English");
-                }
+                case "run checkSYSTEM":
+                    Console.Clear();
+                    Console.WriteLine("cmdOS: v" + VERSION);
+                    break;
+
+                default:
+                    Console.WriteLine("ERROR: A Unknow command");
+                    break;
             }
         }
     }
